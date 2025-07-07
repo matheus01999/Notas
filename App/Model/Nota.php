@@ -21,7 +21,7 @@ Class Nota {
     // METODO RESPONSAVEL POR LISTAS OS REGISTROS DE NOTAS DO BANCO
     public function listar(){
         $conn = Connection::getConn();
-        return $conn->query("SELECT id,descricao FROM notas;")->fetchAll();
+        return $conn->query("SELECT id,descricao FROM notas;")->fetchAll(\PDO::FETCH_ASSOC);
         
     }
 
