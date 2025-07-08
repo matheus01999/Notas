@@ -1,6 +1,6 @@
 <?php
 
-require_once '../Notas/vendor/autoload.php';
+require  '../Notas/vendor/autoload.php';
 
 include '../Notas/includes/header.php';
 include '../Notas/includes/formulario.php';

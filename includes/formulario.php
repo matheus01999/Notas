@@ -1,6 +1,6 @@
 <div class="Formulario">
     <h3> Adicione uma Tarefa</h3>
-    <form method="POST" action="salvar.php">
+    <form method="POST" action="controller.php?salvar">
         <div class="form-group mb-3">
             <label></label>Descrição da Tarefa</label>
             <input type="text" name="descricao" class="form-control" placeholder="descreva aqui">

@@ -11,4 +11,28 @@
 
 <body>
 
-<div class="gridContainer">
+    <!-- ALERTA DE TAREFA SALVA -->
+    <? if (isset($_GET['salvo'])) { ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>TAREFA</strong> salva com sucesso.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <? } ?>
+
+    <!-- ALERTA DE TAREFA EXCLUIDA -->
+     <? if (isset($_GET['excluido'])) { ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>TAREFA</strong> removida com sucesso.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <? } ?>
+
+    <!-- ALERTA DE TAREFA ALTERADA -->
+     <? if (isset($_GET['alterado'])) { ?>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>TAREFA</strong> alterada com sucesso.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <? } ?>
+
+    <div class="gridContainer">
