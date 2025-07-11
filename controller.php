@@ -8,28 +8,29 @@ require  '../Notas/vendor/autoload.php';
 // SALVAR TAREFA
 if (isset($_GET['salvar'])) {
 
+    // VALIDAÇÃO DO LOCAL ONDE A TAREFA SERÁ SALVA
+
+    
     // ARQUIVO JSON
-    $json = 'tarefas.json';
+    $tarefas = 'tarefas.json';
 
-    // ARRAY DA TAREFA
+    // TAREFA RECEBIDA POR POST DO /
     $tarefa = $_POST;
+    print_r($_POST);
 
-    // VALIDANDO ARQUIVO 
-    if (file_exists($json)) {
+    $json = json_decode($tarefas,  'tarefas.json');
 
-        // DECODIFICANDO O JSON 
-        $tarefas_decode = json_decode($json);
-        
-        // CODIFICANDO O ARRAY EM JSON
-        $tarefas_ecode = json_encode($tarefa, JSON_PRETTY_PRINT);
-        
-        //  ABRIR O ARQUIVO JSON
-        $file_json = fopen($json, 'r+');
+    // VALIDANDO ARQUIVO SE O ARQUIVOS EXISTE
+    if (file_exists($tarefas)) {
 
-        // ALTERAR O ARQUIVO JSON
+        //GRAVAR VALORES RECEBIDOS PELO $_POST
+              
 
-        // FECHA O ARQUIVO JSON
     } else {
-        echo 'Arquivo não existe';
+
+        // CRIAR O ARQUIVO DE JSON 
+
+        // REDIRECIONAR PARA O IF TURE
+
     }
 }
