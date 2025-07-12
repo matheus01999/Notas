@@ -26,14 +26,10 @@ if (isset($_GET['salvar'])) {
 
         // ATRIBUIR UM VALOR AO ID RECEBIDO PELO POST
 
-        
+            //VERIFICA A QUANTIDADE DE TAREFAS 
 
-            
-
-
-
-
-        
+            // SOMA A QUANTIDADE DE TAREFA MAIS O VALOR RECEBIDO PELO $_POST
+         
 
         // ADICIONAR OS NOVOS DADOS AO ARRAY
         if (is_array($jsonDecode)) {
