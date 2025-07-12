@@ -9,7 +9,7 @@
                 <th>Ação</th>
             </tr>
             <? foreach ($jsonDecode as $tarefa) { ?>
-                <td>#</td>
+                <td><?=$tarefa['id']?></td>
                 <td><?=$tarefa['descricao']?></td>
                 <td><?=$tarefa['categoria']?></td>
                 <td><?=$tarefa['status']?></td>
