@@ -3,34 +3,37 @@
 require  '../Notas/vendor/autoload.php';
 
 
-
-
 // SALVAR TAREFA
 if (isset($_GET['salvar'])) {
 
     // VALIDAÇÃO DO LOCAL ONDE A TAREFA SERÁ SALVA
 
-    
-    // ARQUIVO JSON
-    $tarefas = 'tarefas.json';
-
-    // TAREFA RECEBIDA POR POST DO /
+    // TAREFA RECEBIDA VIA $_POST
     $tarefa = $_POST;
-    print_r($_POST);
 
-    $json = json_decode($tarefas,  'tarefas.json');
+    // CARREGAR O CONTEUDO DO ARQUIVO JSON 
+    $contetntJson = file_get_contents('tarefas.json');
 
-    // VALIDANDO ARQUIVO SE O ARQUIVOS EXISTE
-    if (file_exists($tarefas)) {
+    // DECODIFICAR O JSON EM UM ARRAY
+    $jsonDecode = json_decode($contetntJson, true);
 
-        //GRAVAR VALORES RECEBIDOS PELO $_POST
-              
-
+    // ADICIONAR OS NOVOS DADOS AO ARRAY
+    if (is_array($jsonDecode)) {
+        $jsonDecode[] = $tarefa;
     } else {
+        
+        $jsonDecode = array($tarefa);
+    }
 
-        // CRIAR O ARQUIVO DE JSON 
+    // CODIFICA O ARQUIVO DE VOLTA PARA JSON
+    $jsonEncode = json_encode($jsonDecode);
 
-        // REDIRECIONAR PARA O IF TURE
-
+    // SALVA O ARQUIVO NO JSON
+    if(file_put_contents('tarefas.json', $jsonEncode)){
+        header('Location: /?salvo');
+    }else{
+        echo 'Erro ao adicionar os dados.....';
     }
 }
+
+// LISTAGEM DE TAEFAS
