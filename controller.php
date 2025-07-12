@@ -3,6 +3,11 @@
 require  '../Notas/vendor/autoload.php';
 
 
+// CARREGAR O CONTEUDO DO ARQUIVO JSON 
+    $contetntJson = file_get_contents('tarefas.json');
+
+
+
 // SALVAR TAREFA
 if (isset($_GET['salvar'])) {
 
@@ -10,9 +15,6 @@ if (isset($_GET['salvar'])) {
 
     // TAREFA RECEBIDA VIA $_POST
     $tarefa = $_POST;
-
-    // CARREGAR O CONTEUDO DO ARQUIVO JSON 
-    $contetntJson = file_get_contents('tarefas.json');
 
     // DECODIFICAR O JSON EM UM ARRAY
     $jsonDecode = json_decode($contetntJson, true);
@@ -34,6 +36,13 @@ if (isset($_GET['salvar'])) {
     }else{
         echo 'Erro ao adicionar os dados.....';
     }
+
 }
 
-// LISTAGEM DE TAEFAS
+// LISTAGEM DE TAREFAS
+
+    // DECODIFICAR O JSON EM UM ARRAY
+    $jsonDecode = json_decode($contetntJson, true);
+
+
+

@@ -6,9 +6,12 @@
                 <th>Nota</th>
                 <th>Açoes</th>
             </tr>
-            <? print_r($tarefas) ?>
-                
-        
+            <? foreach ($jsonDecode as $tarefa) { ?>
+                <td>#</td>
+                <td><?=$tarefa['descricao']?></td>
+                <td>- - - </td>
+                </tr>
+            <? } ?>
 
         </table>
     </div>
