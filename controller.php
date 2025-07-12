@@ -41,8 +41,14 @@ if (isset($_GET['salvar'])) {
 
 // LISTAGEM DE TAREFAS
 
-    // DECODIFICAR O JSON EM UM ARRAY
+    // DECODIFICAR O JSON EM UM ARRAY O MESMO É INCLUIDO NO INDEX PARA O FOREACH
     $jsonDecode = json_decode($contetntJson, true);
+
+// EXCLUIR TAREFA
+
+// EDITAR TAREFA
+
+// FINALIZAR TAREFA
 
 
 
