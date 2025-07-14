@@ -4,10 +4,12 @@ namespace App\Model;
 
 use App\Connection;
 
-Class Nota {
+Class Tarefa {
 
     private $id;
     private $descricao;
+
+    private $categoria;
 
 
 

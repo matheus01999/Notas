@@ -1,6 +1,7 @@
 <?php
 
 require  '../Notas/vendor/autoload.php';
+use App\Model\Tarefa;
 
 
 // CARREGAR O CONTEUDO DO ARQUIVO JSON 
@@ -17,26 +18,34 @@ if (isset($_GET['salvar'])) {
         // TRABALHAR NA LOGICA PARA SALVAR NO BANCO
 
     } else {
-
-        // TAREFA RECEBIDA VIA $_POST
-        $tarefa = $_POST;
-
+        
         // DECODIFICAR O JSON EM UM ARRAY
         $jsonDecode = json_decode($contetntJson, true);
 
         // ATRIBUIR UM VALOR AO ID RECEBIDO PELO POST
+        $CountTarefas = count($jsonDecode); // QUANTIDADE DE TAREFAS
+        $id = $_POST['id']; // ID RECEBIDO POR $_POST
+        $newID = $id + $CountTarefas; // SOMA DOS VALORES DE $CountTarefas e $id
 
-            //VERIFICA A QUANTIDADE DE TAREFAS 
 
-            // SOMA A QUANTIDADE DE TAREFA MAIS O VALOR RECEBIDO PELO $_POST
-         
+        // CRIA UM OBJETO GENERICO E ATRIBUI A ELE OS VALORES RECEBIDOS DO POST
+        $Tarefa = new stdClass();
+        $Tarefa->id = $newID;
+        $Tarefa->descricao =  $_POST['descricao'];
+        $Tarefa->categoria = $_POST['categoria'];
+        $Tarefa->status = $_POST['status'];
 
+        // CONVERTE O OBJETO EM UM ARRAY
+        $novaTarefa = (Array) $Tarefa;
+
+
+        
         // ADICIONAR OS NOVOS DADOS AO ARRAY
         if (is_array($jsonDecode)) {
-            $jsonDecode[] = $tarefa;
+            $jsonDecode[] = $novaTarefa;
         } else {
 
-            $jsonDecode = array($tarefa);
+            $jsonDecode = array($novaTarefa);
         }
 
         // CODIFICA O ARQUIVO DE VOLTA PARA JSON
@@ -53,11 +62,45 @@ if (isset($_GET['salvar'])) {
 
 // LISTAGEM DE TAREFAS
 
-// DECODIFICAR O JSON EM UM ARRAY O MESMO É INCLUIDO NO INDEX PARA O FOREACH
-$jsonDecode = json_decode($contetntJson, true);
+    // DECODIFICAR O JSON EM UM ARRAY O MESMO É INCLUIDO NO INDEX PARA O FOREACH
+    $jsonDecode = json_decode($contetntJson, true);
 
 // EXCLUIR TAREFA
 
+    // IDENTIFICA O ID DA TAREFA
+    if (isset($_GET['excluir'])) {
+        $id = $_GET['excluir']; // VALOR DO ID QUE SERÁ EXCLUIDO
+
+        //LOCALIZA O ID NO ARRAY DE TAREFAS
+        echo $id;
+        echo'<pre>';
+        foreach($jsonDecode as $resultado){
+            if($resultado['id'] == $id){
+                echo'<pre>';
+                print_r($resultado);
+            }
+
+        }
+        
+    }
+
+
+
 // EDITAR TAREFA
+if (isset($_GET['editar'])) {
+        $id = $_GET['editar']; // VALOR DO ID QUE SERÁ EXCLUIDO
+
+        //LOCALIZA O ID NO ARRAY DE TAREFAS
+        echo $id;
+        echo'<pre>';
+        foreach($jsonDecode as $resultado){
+            if($resultado['id'] == $id){
+                echo'<pre>';
+                print_r($resultado);
+            }
+
+        }
+        
+    }
 
 // FINALIZAR TAREFA

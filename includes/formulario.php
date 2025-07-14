@@ -26,7 +26,7 @@
             <input type="checkbox" class="form-check-input" name="status" value="Ativo" hidden checked>
         </div>
 
-        <input  name="id" value=0 hidden>
+        <input  name="id" value=1 hidden>
 
         <button type="submit" class="btn btn-primary">Salvar</button>
     </form>
