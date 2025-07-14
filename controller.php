@@ -1,6 +1,7 @@
 <?php
 
 require  '../Notas/vendor/autoload.php';
+
 use App\Model\Tarefa;
 
 
@@ -18,7 +19,7 @@ if (isset($_GET['salvar'])) {
         // TRABALHAR NA LOGICA PARA SALVAR NO BANCO
 
     } else {
-        
+
         // DECODIFICAR O JSON EM UM ARRAY
         $jsonDecode = json_decode($contetntJson, true);
 
@@ -36,10 +37,10 @@ if (isset($_GET['salvar'])) {
         $Tarefa->status = $_POST['status'];
 
         // CONVERTE O OBJETO EM UM ARRAY
-        $novaTarefa = (Array) $Tarefa;
+        $novaTarefa = (array) $Tarefa;
 
 
-        
+
         // ADICIONAR OS NOVOS DADOS AO ARRAY
         if (is_array($jsonDecode)) {
             $jsonDecode[] = $novaTarefa;
@@ -62,45 +63,53 @@ if (isset($_GET['salvar'])) {
 
 // LISTAGEM DE TAREFAS
 
-    // DECODIFICAR O JSON EM UM ARRAY O MESMO É INCLUIDO NO INDEX PARA O FOREACH
-    $jsonDecode = json_decode($contetntJson, true);
+// DECODIFICAR O JSON EM UM ARRAY O MESMO É INCLUIDO NO INDEX PARA O FOREACH
+$jsonDecode = json_decode($contetntJson, true);
 
 // EXCLUIR TAREFA
 
-    // IDENTIFICA O ID DA TAREFA
-    if (isset($_GET['excluir'])) {
-        $id = $_GET['excluir']; // VALOR DO ID QUE SERÁ EXCLUIDO
+// IDENTIFICA O ID DA TAREFA
+if (isset($_GET['excluir'])) {
+    $id = $_GET['excluir']; // VALOR DO ID QUE SERÁ EXCLUIDO
 
-        //LOCALIZA O ID NO ARRAY DE TAREFAS
-        echo $id;
-        echo'<pre>';
-        foreach($jsonDecode as $resultado){
-            if($resultado['id'] == $id){
-                echo'<pre>';
-                print_r($resultado);
+    //LOCALIZA O ID NO ARRAY DE TAREFAS
+    foreach ($jsonDecode as $key => $value) {
+        if ($value['id'] == $id) {
+
+            // REMOVE A TERFA DO ARRAY
+            unset($jsonDecode[$key]);
+            array_values($jsonDecode);
+
+            // CODIFICA O ARQUIVO DE VOLTA PARA JSON
+            $jsonEncode = json_encode($jsonDecode);
+
+            // SALVA O ARQUIVO NO JSON
+            if (file_put_contents('tarefas.json', $jsonEncode)) {
+                header('Location: /?excluido');
+            } else {
+                echo 'Erro ao adicionar os dados.....';
             }
-
+        } else {
+            echo 'Erro : Item não localizado no array de tarefas ....';
         }
-        
     }
+}
 
 
 
 // EDITAR TAREFA
 if (isset($_GET['editar'])) {
-        $id = $_GET['editar']; // VALOR DO ID QUE SERÁ EXCLUIDO
+    $id = $_GET['editar']; // VALOR DO ID QUE SERÁ EXCLUIDO
 
-        //LOCALIZA O ID NO ARRAY DE TAREFAS
-        echo $id;
-        echo'<pre>';
-        foreach($jsonDecode as $resultado){
-            if($resultado['id'] == $id){
-                echo'<pre>';
-                print_r($resultado);
-            }
-
+    //LOCALIZA O ID NO ARRAY DE TAREFAS
+    echo $id;
+    echo '<pre>';
+    foreach ($jsonDecode as $resultado) {
+        if ($resultado['id'] == $id) {
+            echo '<pre>';
+            print_r($resultado);
         }
-        
     }
+}
 
 // FINALIZAR TAREFA
