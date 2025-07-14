@@ -15,7 +15,7 @@
                 <td><?=$tarefa['status']?></td>
                 <td><a href="#" class="btn btn-primary">Editar</a></td>
                 <td><a href="/controller.php?excluir=<?=$tarefa['id']?>" class="btn btn-danger">Exluir</a></td>
-                <td><a href="#" class="btn btn-success">Finalizar</a></td>
+                <td><a href="/controller.php?finalizar=<?=$tarefa['id']?>" class="btn btn-success">Finalizar</a></td>
                 </tr>
             <? } ?>
 

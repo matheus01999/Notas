@@ -99,7 +99,7 @@ if (isset($_GET['excluir'])) {
 
 // EDITAR TAREFA
 if (isset($_GET['editar'])) {
-    $id = $_GET['editar']; // VALOR DO ID QUE SERÁ EXCLUIDO
+    $id = $_GET['editar']; // VALOR DO ID QUE SERÁ EDITADO
 
     //LOCALIZA O ID NO ARRAY DE TAREFAS
     echo $id;
@@ -113,3 +113,40 @@ if (isset($_GET['editar'])) {
 }
 
 // FINALIZAR TAREFA
+if (isset($_GET['finalizar'])) {
+    $id = $_GET['finalizar']; // VALOR DO ID QUE SERÁ FINALIZADO
+
+    //LOCALIZA O ID NO ARRAY DE TAREFAS
+    foreach ($jsonDecode as $key => $value) {
+        if ($value['id'] == $id) {
+
+
+            // ALTERA O VALOR DO STATUS DA TAREFA SELECIONADA
+
+            if($value['status'] == 'Ativo'){ // VALIDA O STATUS ATUAL
+
+                // ALTERANDO O VALOR SE ATIVO
+                $value['status'] = 'Finalizada';
+                echo '<pre>';
+                print_r($jsonDecode);
+
+            }else{
+
+                // ALTERANDO O VALOR SE FINALIZADO
+                $value['status'] = 'Ativo';
+            }
+
+            // CODIFICA O ARQUIVO DE VOLTA PARA JSON
+            $jsonEncode = json_encode($jsonDecode);
+
+            // SALVA O ARQUIVO NO JSON
+            if (file_put_contents('tarefas.json', $jsonEncode)) {
+                //header('Location: /?status');
+            } else {
+                echo 'Erro ao adicionar os dados.....';
+            }
+        } else {
+            echo 'Erro : Item não localizado no array de tarefas ....';
+        }
+    }
+}
