@@ -1,6 +1,6 @@
 <?php
 
-require  '../Notas/vendor/autoload.php';
+require '../Notas/vendor/autoload.php';
 
 use App\Model\Tarefa;
 
@@ -32,7 +32,7 @@ if (isset($_GET['salvar'])) {
         // CRIA UM OBJETO GENERICO E ATRIBUI A ELE OS VALORES RECEBIDOS DO POST
         $Tarefa = new stdClass();
         $Tarefa->id = $newID;
-        $Tarefa->descricao =  $_POST['descricao'];
+        $Tarefa->descricao = $_POST['descricao'];
         $Tarefa->categoria = $_POST['categoria'];
         $Tarefa->status = $_POST['status'];
 
@@ -104,12 +104,30 @@ if (isset($_GET['editar'])) {
     $id = $_GET['editar']; // VALOR DO ID QUE SERÁ EDITADO
 
     //LOCALIZA O ID NO ARRAY DE TAREFAS
-    echo $id;
-    echo '<pre>';
-    foreach ($jsonDecode as $resultado) {
-        if ($resultado['id'] == $id) {
-            echo '<pre>';
-            print_r($resultado);
+    foreach ($jsonDecode as $key => $value) {
+        if ($value['id'] == $id) {
+
+            // RECUPERA O VALOR DO INDICE DA TAREFA 
+            $indice = $key;
+
+            // ALTERA OS ELEMENTOS DO INDICE COM NOS RECEBIDOS VIA $_POST
+            $value['categoria'] = $_POST['categoria'];
+            $value['descricao'] = $_POST['descricao'];
+            $value['status'] = $_POST['status'];
+
+            // ALTERA O VALOR O ELEMENTO NO ARRAY 
+            $jsonDecode[$indice] = $value;
+
+            // CODIFICA O ARQUIVO DE VOLTA PARA JSON
+            $jsonEncode = json_encode($jsonDecode);
+
+            // SALVA O ARQUIVO NO JSON
+            if (file_put_contents('tarefas.json', $jsonEncode)) {
+
+                header('Location: /?alterado');
+            } else {
+                echo 'Erro ao alterar os dados.....';
+            }
         }
     }
 }
