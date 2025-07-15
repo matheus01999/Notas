@@ -85,6 +85,8 @@ if (isset($_GET['excluir'])) {
 
             // SALVA O ARQUIVO NO JSON
             if (file_put_contents('tarefas.json', $jsonEncode)) {
+                echo '<pre>';
+                print_r($jsonDecode);
                 header('Location: /?excluido');
             } else {
                 echo 'Erro ao adicionar os dados.....';
@@ -120,20 +122,20 @@ if (isset($_GET['finalizar'])) {
     foreach ($jsonDecode as $key => $value) {
         if ($value['id'] == $id) {
 
+            // RECUPERA O VALOR DO INDICE DA TAREFA 
+            $indice = $key;
 
-            // ALTERA O VALOR DO STATUS DA TAREFA SELECIONADA
+            // ALTERA O VALOR DO ELEMENTO STATUS 
+            if ($value['status'] == 'Ativo') {
+                $value['status'] = 'Fianlizado';
 
-            if($value['status'] == 'Ativo'){ // VALIDA O STATUS ATUAL
-
-                // ALTERANDO O VALOR SE ATIVO
-                $value['status'] = 'Finalizada';
-                echo '<pre>';
-                print_r($jsonDecode);
-
-            }else{
-
-                // ALTERANDO O VALOR SE FINALIZADO
+                // ALTERA O VALOR O ELEMENTO NO ARRAY 
+                $jsonDecode[$indice] = $value;
+            } else {
                 $value['status'] = 'Ativo';
+
+                // ALTERA O VALOR O ELEMENTO NO ARRAY 
+                $jsonDecode[$indice] = $value;
             }
 
             // CODIFICA O ARQUIVO DE VOLTA PARA JSON
@@ -141,12 +143,11 @@ if (isset($_GET['finalizar'])) {
 
             // SALVA O ARQUIVO NO JSON
             if (file_put_contents('tarefas.json', $jsonEncode)) {
-                //header('Location: /?status');
+
+                header('Location: /?alterado');
             } else {
-                echo 'Erro ao adicionar os dados.....';
+                echo 'Erro ao alterar os dados.....';
             }
-        } else {
-            echo 'Erro : Item não localizado no array de tarefas ....';
         }
     }
 }
