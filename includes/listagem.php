@@ -13,7 +13,7 @@
                 <td><?=$tarefa['descricao']?></td>
                 <td><?=$tarefa['categoria']?></td>
                 <td><?=$tarefa['status']?></td>
-                <td><a href="/controller.php?editar=<?=$tarefa['id']?>" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar</a></td>
+                <td><a href="/controller.php?editar=<?=$tarefa['id']?>" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal<?=$tarefa['id']?>">Editar</a></td>
                 <td><a href="/controller.php?excluir=<?=$tarefa['id']?>" class="btn btn-danger">Exluir</a></td>
                 <td><a href="/controller.php?finalizar=<?=$tarefa['id']?>" class="btn btn-success">Finalizar</a></td>
                 </tr>

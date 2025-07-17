@@ -8,7 +8,10 @@ use App\Model\Tarefa;
 // CARREGAR O CONTEUDO DO ARQUIVO JSON 
 $contetntJson = file_get_contents('tarefas.json');
 
+// LISTAGEM DE TAREFAS
 
+// DECODIFICAR O JSON EM UM ARRAY O MESMO É INCLUIDO NO INDEX PARA O FOREACH
+$jsonDecode = json_decode($contetntJson, true);
 
 // SALVAR TAREFA
 if (isset($_GET['salvar'])) {
@@ -61,10 +64,7 @@ if (isset($_GET['salvar'])) {
     }
 }
 
-// LISTAGEM DE TAREFAS
 
-// DECODIFICAR O JSON EM UM ARRAY O MESMO É INCLUIDO NO INDEX PARA O FOREACH
-$jsonDecode = json_decode($contetntJson, true);
 
 // EXCLUIR TAREFA
 

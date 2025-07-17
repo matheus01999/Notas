@@ -1,5 +1,6 @@
 <div class="Formulario">
     <h3> Adicione uma Tarefa</h3>
+    <a href=""  data-bs-toggle="modal" data-bs-target="#modalConfig"><img src="../public/image/config.png" style="width:30px;height:30px; float:right"></a>
     <form method="POST" action="controller.php?salvar">
         <div class="form-group mb-3">
             <label></label>Categoria</label>
