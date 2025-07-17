@@ -174,6 +174,13 @@ if (isset($_GET['finalizar'])) {
 // CONFIGURAR BANCO
 if (isset($_GET['configurar'])) {
 
+    $fileConfigJson = 'config.json';
+    // VALIDA SE O ARQUIVO DE CONFIGURAÇÃO EXISTE
+    if(file_exists($fileConfigJson)){
+        
+    }
+    
+
     // DECODIFICAR O JSON EM UM ARRAY O MESMO É INCLUIDO NO INDEX PARA O FOREACH
     $configDecode = json_decode($configJson, true);
 
