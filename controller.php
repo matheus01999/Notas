@@ -7,6 +7,7 @@ use App\Model\Tarefa;
 
 // CARREGAR O CONTEUDO DO ARQUIVO JSON 
 $contetntJson = file_get_contents('tarefas.json');
+$configJson = file_get_contents('config.json');
 
 // LISTAGEM DE TAREFAS
 
@@ -167,5 +168,41 @@ if (isset($_GET['finalizar'])) {
                 echo 'Erro ao alterar os dados.....';
             }
         }
+    }
+}
+
+// CONFIGURAR BANCO
+if (isset($_GET['configurar'])) {
+
+    // DECODIFICAR O JSON EM UM ARRAY O MESMO É INCLUIDO NO INDEX PARA O FOREACH
+    $configDecode = json_decode($configJson, true);
+
+    // CRIA UM OBJETO GENERICO E ATRIBUI A ELE OS VALORES RECEBIDOS DO POST
+    $Config = new stdClass();
+    $Config->dns = $_POST['dns'];
+    $Config->host = $_POST['host'];
+    $Config->dbname = $_POST['dbname'];
+    $Config->user = $_POST['user'];
+    $Config->passwrod = $_POST['password'];
+
+    // CONVERTE O OBJETO EM UM ARRAY
+    $novaConfig = (array) $Config;
+
+    // ADICIONAR OS NOVOS DADOS AO ARRAY
+    if (is_array($configDecode)) {
+        $configDecode[] = $novaConfig;
+    } else {
+
+        $jsonDecode = array($novaConfig);
+    }
+
+    // CODIFICA O ARQUIVO DE VOLTA PARA JSON
+    $configEncode = json_encode($configDecode);
+
+    // SALVA O ARQUIVO NO JSON
+    if (file_put_contents('config.json', $configEncode)) {
+        header('Location: /');
+    } else {
+        echo 'Erro ao adicionar os dados.....';
     }
 }
