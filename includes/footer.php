@@ -8,7 +8,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="controller.php?editar">
+                    <form method="POST" action="controller.php?editar=<?= $tarefa['id'] ?>">
                         <div class="form-group mb-3">
                             <label></label>Categoria</label>
                             <select class="form-select" aria-label="Default select example" name="categoria">
@@ -27,17 +27,12 @@
                         </div>
 
                         <div class="form-group form-check mb-3">
-                            <input type="checkbox" class="form-check-input" name="online" value="1">
-                            <label class="form-check-label">Registrar no Banco</label>
-                        </div>
-
-                        <div class="form-group form-check mb-3">
                             <input type="checkbox" class="form-check-input" name="status" value="<?= $tarefa['status'] ?>" hidden checked>
                         </div>
 
                         <input name="id" value=<?= $tarefa['id'] ?> hidden>
 
-                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="submit" class="btn btn-success" style="float: right;">Alterar</button>
                     </form>
                 </div>
             </div>
