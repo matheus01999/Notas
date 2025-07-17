@@ -14,13 +14,17 @@ $configJson = file_get_contents('config.json');
 // DECODIFICAR O JSON EM UM ARRAY O MESMO É INCLUIDO NO INDEX PARA O FOREACH
 $jsonDecode = json_decode($contetntJson, true);
 
+// DECODIFICA O JSON DE CONFIGURAÇÃO DO BANCO O MESMO É INCLUIDO NO INDEX PARA UM FOREACH 
+$configDecode = json_decode($configJson, true);
+
 // SALVAR TAREFA
 if (isset($_GET['salvar'])) {
 
     // VALIDAÇÃO DO LOCAL ONDE A TAREFA SERÁ SALVA
     if (isset($_POST['online']) && $_POST['online'] == 1) {
 
-        // TRABALHAR NA LOGICA PARA SALVAR NO BANCO
+        echo '<pre>';
+        print_r($_POST);
 
     } else {
 
@@ -190,18 +194,13 @@ if (isset($_GET['configurar'])) {
     $Config->host = $_POST['host'];
     $Config->dbname = $_POST['dbname'];
     $Config->user = $_POST['user'];
-    $Config->passwrod = $_POST['password'];
+    $Config->password = $_POST['password'];
 
     // CONVERTE O OBJETO EM UM ARRAY
     $novaConfig = (array) $Config;
 
-    // ADICIONAR OS NOVOS DADOS AO ARRAY
-    if (is_array($configDecode)) {
-        $configDecode[] = $novaConfig;
-    } else {
-
-        $jsonDecode = array($novaConfig);
-    }
+    // SALVA O ARRAY NA PRIMEIRA POSIÇÃO
+    $configDecode[0] = $novaConfig;
 
     // CODIFICA O ARQUIVO DE VOLTA PARA JSON
     $configEncode = json_encode($configDecode);

@@ -50,33 +50,35 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <? foreach($configDecode as $config) { ?> 
                 <form method="POST" action="controller.php?configurar">
                     <div class="form-group mb-3">
                         <label class="form-label"></label>Banco</label>
                         <select class="form-select" aria-label="Default select example" name="dns">
-                            <option selected>Selecione</option>
+                            <option selected><?=$config['dns']?></option>
                             <option value="mysql">My SQL</option>
                         </select>
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label">Hostname</label>
-                        <input type="text" class="form-control" name="host">
+                        <input type="text" class="form-control" name="host" value="<?=$config['host']?>">
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label">DBname</label>
-                        <input type="text" class="form-control" name="dbname">
+                        <input type="text" class="form-control" name="dbname" value="<?=$config['dbname']?>">
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label">User</label>
-                        <input type="text" class="form-control" name="user">
+                        <input type="text" class="form-control" name="user" value="<?=$config['user']?>">
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label">Password</label>
-                        <input type="text" class="form-control" name="password">
+                        <input type="text" class="form-control" name="password" value="<?=$config['password']?>">
                     </div>
 
-                    <button type="submit" class="btn btn-primary" style="float: right;">Conectar</button>
+                    <button type="submit" class="btn btn-primary" style="float: right;">Salvar</button>
                 </form>
+                <? } ?>
             </div>
         </div>
     </div>

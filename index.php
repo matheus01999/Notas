@@ -7,6 +7,11 @@ include '../Notas/includes/formulario.php';
 include '../Notas/includes/listagem.php';
 include '../Notas/includes/footer.php';
 
+use App\Connection;
+
+echo'<pre>';
+print_r($configDecode);
+
 ?>
 
 
