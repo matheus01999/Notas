@@ -2,27 +2,29 @@
 
 namespace App;
 
-// RECUPERAR OS DADOS DO JSON DE CONFIGURAÇÃO
-
-// CARREGAR O ARQUIVO JSON
-$configJson = file_get_contents('config.json');
-
-// DECODIFICA O JSON DE CONFIGURAÇÃO DO BANCO O MESMO É INCLUIDO NO INDEX PARA UM FOREACH 
-$configDecode = json_decode($configJson, true);
-
-echo'<pre>';
-print_r($configDecode);
 
 class Connection
 {
 
-
-
-
 	private static $conn;
+	
 
+	
 	public static function getConn()
 	{
+
+		// CARREGAR O ARQUIVO JSON
+		$configJson = file_get_contents('config.json');
+
+		// DECODIFICA O JSON DE CONFIGURAÇÃO DO BANCO O MESMO É INCLUIDO NO INDEX PARA UM FOREACH 
+		$configDecode = json_decode($configJson, true);
+
+		echo'<pre>';
+		print_r($configDecode);
+
+		
+
+		
 		try {
 
 			self::$conn = new \PDO(
@@ -32,15 +34,8 @@ class Connection
 			);
 
 			return self::$conn;
-
-
 		} catch (\PDOException $Error) {
-			echo 'Erro de  PDO' . $Error;
+			echo 'Erro de  PDO ' . $Error;
 		}
 	}
 }
-
-
-
-
-?>

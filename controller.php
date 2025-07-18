@@ -3,6 +3,7 @@
 require '../Notas/vendor/autoload.php';
 
 use App\Model\Tarefa;
+use App\Connection;
 
 
 // CARREGAR O CONTEUDO DO ARQUIVO JSON 
@@ -23,9 +24,13 @@ if (isset($_GET['salvar'])) {
     // VALIDAÇÃO DO LOCAL ONDE A TAREFA SERÁ SALVA
     if (isset($_POST['online']) && $_POST['online'] == 1) {
 
-        echo '<pre>';
-        print_r($_POST);
+        // INSTÂNCIA DE CONEXAO
+        $db = Connection::getConn();
 
+        // INSTANCIAR MODELO
+        $tarefa = new Tarefa($db);
+
+        
     } else {
 
         // DECODIFICAR O JSON EM UM ARRAY
