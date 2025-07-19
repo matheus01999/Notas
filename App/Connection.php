@@ -19,18 +19,16 @@ class Connection
 		// DECODIFICA O JSON DE CONFIGURAÇÃO DO BANCO O MESMO É INCLUIDO NO INDEX PARA UM FOREACH 
 		$configDecode = json_decode($configJson, true);
 
-		echo'<pre>';
-		print_r($configDecode);
-
+		$dbconfig = $configDecode[0];
 		
 
-		
+	
 		try {
 
 			self::$conn = new \PDO(
-				"mysql:host=localhost;dbname=appnotas;charset=utf8",
-				"root",
-				""
+				"mysql:host=".$dbconfig['host'].";dbname=".$dbconfig['dbname'].";charset=utf8",
+				$dbconfig['user'],
+				$dbconfig['password']
 			);
 
 			return self::$conn;

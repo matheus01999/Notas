@@ -95,8 +95,6 @@ if (isset($_GET['excluir'])) {
 
             // SALVA O ARQUIVO NO JSON
             if (file_put_contents('tarefas.json', $jsonEncode)) {
-                echo '<pre>';
-                print_r($jsonDecode);
                 header('Location: /?excluido');
             } else {
                 echo 'Erro ao adicionar os dados.....';
